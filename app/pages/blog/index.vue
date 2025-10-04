@@ -34,10 +34,10 @@
       >
         <article
           v-for="post in filteredPosts"
-          :key="post._path"
+          :key="post.path"
           class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
         >
-          <NuxtLink :to="post._path" class="block p-6">
+          <NuxtLink :to="post.path" class="block p-6">
             <!-- 文章标题 -->
             <h2
               class="text-xl font-semibold text-gray-900 dark:text-white mb-3 line-clamp-2"
@@ -114,6 +114,9 @@
  * 展示所有博客文章，支持搜索和标签过滤
  */
 
+// 导入必须位于模块顶部，避免 import/first 违规
+import type { BlogCollectionItem } from "@nuxt/content"
+
 // 页面元信息
 useSeoMeta({
   title: "博客文章 - 技术分享与教程",
@@ -124,15 +127,6 @@ useSeoMeta({
 });
 
 // 接口定义
-interface BlogPost {
-  _path: string;
-  title: string;
-  description: string;
-  date: string;
-  tags?: string[];
-  author: string;
-  featured?: boolean;
-}
 
 interface TagOption {
   label: string;
@@ -145,37 +139,19 @@ const selectedTag = ref("");
 const currentPage = ref(1);
 const pageSize = 9;
 
-// 查询所有博客文章 - 使用静态数据作为示例
-const allPosts: BlogPost[] = [
-  {
-    _path: "/blog/hello-world",
-    title: "Hello World - 我的第一篇文章",
-    description:
-      "这是使用 Nuxt Content 创建的第一篇示例文章，展示了 Markdown 的各种功能。",
-    date: "2024-01-15",
-    tags: ["nuxt", "content", "markdown", "blog"],
-    author: "Nuxt Developer",
-  },
-  {
-    _path: "/blog/nuxt-content-features",
-    title: "Nuxt Content 高级功能详解",
-    description:
-      "深入了解 Nuxt Content 的高级功能，包括查询 API、组件集成和性能优化。",
-    date: "2024-01-20",
-    tags: ["nuxt", "content", "advanced", "tutorial"],
-    author: "Senior Developer",
-    featured: true,
-  },
-];
+// 查询所有博客文章 - 使用 Nuxt Content 集合 API
+const { data: allPosts } = await useAsyncData("blog-all-posts", () => {
+  return queryCollection("blog").all()
+})
 
 // 计算属性
-const totalPosts = computed(() => allPosts.length);
+const totalPosts = computed(() => allPosts.value?.length || 0);
 const totalPages = computed(() => Math.ceil(totalPosts.value / pageSize));
 
 // 获取所有标签
 const allTags = computed(() => {
   const tags = new Set<string>();
-  allPosts.forEach((post: BlogPost) => {
+  (allPosts.value || []).forEach((post: BlogCollectionItem) => {
     if (post.tags) {
       post.tags.forEach((tag: string) => tags.add(tag));
     }
@@ -189,15 +165,34 @@ const tagOptions = computed((): TagOption[] => [
   ...allTags.value.map((tag: string) => ({ label: tag, value: tag })),
 ]);
 
+// 将日期值安全转换为时间戳，避免 any 类型
+function toTimestamp(input: unknown): number {
+  if (!input) return 0
+  if (input instanceof Date) return input.getTime()
+  if (typeof input === 'string' || typeof input === 'number') {
+    const d = new Date(input)
+    const t = d.getTime()
+    return Number.isNaN(t) ? 0 : t
+  }
+  return 0
+}
+
 // 过滤后的文章
 const filteredPosts = computed(() => {
-  let posts = allPosts;
+  let posts: BlogCollectionItem[] = (allPosts.value || []);
+
+  // 按日期倒序（如果存在 date）
+  posts = posts.slice().sort((a: BlogCollectionItem, b: BlogCollectionItem) => {
+    const ad = toTimestamp(a.date as unknown)
+    const bd = toTimestamp(b.date as unknown)
+    return bd - ad
+  })
 
   // 搜索过滤
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
     posts = posts.filter(
-      (post: BlogPost) =>
+      (post: BlogCollectionItem) =>
         post.title.toLowerCase().includes(query) ||
         post.description.toLowerCase().includes(query) ||
         (post.tags &&
@@ -208,7 +203,7 @@ const filteredPosts = computed(() => {
   // 标签过滤
   if (selectedTag.value) {
     posts = posts.filter(
-      (post: BlogPost) => post.tags && post.tags.includes(selectedTag.value)
+      (post: BlogCollectionItem) => post.tags && post.tags.includes(selectedTag.value)
     );
   }
 
@@ -223,8 +218,9 @@ const filteredPosts = computed(() => {
  * @param dateString 日期字符串
  * @returns 格式化后的日期
  */
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("zh-CN", {
+function formatDate(dateInput: string | Date): string {
+  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput
+  return date.toLocaleDateString("zh-CN", {
     year: "numeric",
     month: "long",
     day: "numeric",
