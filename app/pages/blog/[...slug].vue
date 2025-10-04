@@ -158,13 +158,13 @@
                 </template>
 
                 <div class="p-4 max-h-96 overflow-y-auto mobile-toc">
-                   <UContentToc
-                     v-if="post?.body?.toc?.links"
-                     :links="post.body.toc.links"
-                     class="text-sm"
-                     @click="showMobileToc = false"
-                   />
-                 </div>
+                  <UContentToc
+                    v-if="post?.body?.toc?.links"
+                    :links="post.body.toc.links"
+                    class="text-sm"
+                    @click="showMobileToc = false"
+                  />
+                </div>
               </UCard>
             </UModal>
           </div>
@@ -239,8 +239,13 @@
  * 显示单篇文章的完整内容
  */
 
-// 导入 Nuxt Content 类型
+// 导入 Nuxt Content 类型（确保导入位于模块顶部，符合 ESLint import/first 规则）
 import type { BlogCollectionItem } from "@nuxt/content"
+
+// 指定使用博客布局（根据 Nuxt 4 文档：definePageMeta({ layout: 'blog' })）
+definePageMeta({
+  layout: "blog",
+})
 
 // 获取路由参数
 const route = useRoute()
@@ -257,22 +262,22 @@ let _updateLgUp: (() => void) | null = null
 onMounted(() => {
   const update = () => {
     // 仅在客户端执行断点判断
-    if (typeof window !== 'undefined') {
-      isLgUp.value = window.matchMedia('(min-width: 1024px)').matches
+    if (typeof window !== "undefined") {
+      isLgUp.value = window.matchMedia("(min-width: 1024px)").matches
       // 切到桌面端时自动关闭移动端目录弹窗，避免重复目录
       if (isLgUp.value) showMobileToc.value = false
     }
   }
   _updateLgUp = update
   update()
-  if (typeof window !== 'undefined') {
-    window.addEventListener('resize', update)
+  if (typeof window !== "undefined") {
+    window.addEventListener("resize", update)
   }
 })
 
 onBeforeUnmount(() => {
-  if (typeof window !== 'undefined' && _updateLgUp) {
-    window.removeEventListener('resize', _updateLgUp)
+  if (typeof window !== "undefined" && _updateLgUp) {
+    window.removeEventListener("resize", _updateLgUp)
   }
 })
 

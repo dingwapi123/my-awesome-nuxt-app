@@ -9,8 +9,10 @@
     <!-- 路由公告器，用于无障碍访问 -->
     <NuxtRouteAnnouncer />
 
-    <!-- 页面内容 -->
-    <NuxtPage />
+    <!-- 布局包裹页面内容（启用 Nuxt 布局系统） -->
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </UApp>
 </template>
 
@@ -47,4 +49,15 @@ useHead({
  * 这里的样式会应用到整个应用
  * 主要的样式定义在 assets/css/main.css 中
  */
+
+/* 布局切换过渡（根据 Nuxt 4 文档的 layout 过渡示例） */
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.3s ease;
+}
+.layout-enter-from,
+.layout-leave-to {
+  filter: grayscale(0.1);
+  opacity: 0.98;
+}
 </style>
