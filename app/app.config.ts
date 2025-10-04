@@ -19,6 +19,12 @@ export default defineAppConfig({
       neutral: 'gray'       // 中性色：灰色
     },
     
+    // 图标配置 - 为 ColorModeButton 配置 Lucide 图标
+    icons: {
+      light: 'i-lucide-sun',    // 亮色模式图标
+      dark: 'i-lucide-moon'     // 暗色模式图标
+    },
+    
     // 全局组件默认配置
     button: {
       // 按钮组件的默认配置
