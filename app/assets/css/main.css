@@ -1,0 +1,60 @@
+/**
+ * 主样式文件 - Nuxt UI 和 Tailwind CSS 配置
+ * 
+ * 这个文件导入了 Tailwind CSS 和 Nuxt UI 的样式
+ * 按照 Nuxt UI v4 的最佳实践配置
+ */
+
+/* 导入 Tailwind CSS 基础样式 */
+@import "tailwindcss";
+
+/* 导入 Nuxt UI 组件样式 */
+@import "@nuxt/ui";
+
+/**
+ * 自定义 CSS 变量和全局样式
+ * 可以在这里添加项目特定的样式覆盖
+ */
+
+/* 自定义根变量 */
+:root {
+  /* 可以在这里定义自定义的 CSS 变量 */
+  --custom-spacing: 1rem;
+}
+
+/* 全局样式重置和基础样式 */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* 确保页面有合适的最小高度 */
+  min-height: 100vh;
+}
+
+/* 自定义滚动条样式（可选） */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(156 163 175 / 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(156 163 175 / 0.7);
+}
+
+/* 深色模式下的滚动条 */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgb(75 85 99 / 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgb(75 85 99 / 0.7);
+}
