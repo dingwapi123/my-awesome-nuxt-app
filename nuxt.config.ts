@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   // 模块配置 - 按推荐顺序排列
   modules: [
     "@nuxt/ui", // UI 组件库，需要在其他模块之前
-    "@nuxt/fonts", // 字体管理 - 需要显式添加以使用自定义配置
     "@nuxt/content", // 内容管理
     "@nuxt/image", // 图片优化
     "@nuxt/eslint", // 代码检查

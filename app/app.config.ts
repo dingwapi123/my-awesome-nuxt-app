@@ -23,7 +23,7 @@ export default defineAppConfig({
     button: {
       // 按钮组件的默认配置
       slots: {
-        root: 'transition-all duration-200 ease-in-out'
+        base: 'transition-all duration-200 ease-in-out'
       }
     },
     
@@ -37,7 +37,7 @@ export default defineAppConfig({
     // 输入框组件配置
     input: {
       slots: {
-        root: 'transition-colors duration-200'
+        base: 'transition-colors duration-200'
       }
     }
   },

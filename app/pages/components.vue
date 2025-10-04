@@ -39,7 +39,9 @@
             <div class="space-y-6">
               <!-- 基础按钮 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   基础按钮
                 </h3>
                 <div class="flex flex-wrap gap-4">
@@ -54,7 +56,9 @@
 
               <!-- 按钮变体 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   按钮变体
                 </h3>
                 <div class="flex flex-wrap gap-4">
@@ -67,14 +71,18 @@
 
               <!-- 带图标的按钮 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   带图标的按钮
                 </h3>
                 <div class="flex flex-wrap gap-4">
                   <UButton icon="i-lucide-plus">添加</UButton>
                   <UButton icon="i-lucide-edit">编辑</UButton>
                   <UButton icon="i-lucide-trash" color="error">删除</UButton>
-                  <UButton icon="i-lucide-download" variant="outline">下载</UButton>
+                  <UButton icon="i-lucide-download" variant="outline"
+                    >下载</UButton
+                  >
                 </div>
               </div>
             </div>
@@ -115,10 +123,7 @@
                   placeholder="选择分类"
                   label="分类"
                 />
-                <UCheckbox
-                  v-model="formData.agree"
-                  label="我同意服务条款"
-                />
+                <UCheckbox v-model="formData.agree" label="我同意服务条款" />
                 <URadioGroup
                   v-model="formData.priority"
                   :options="priorityOptions"
@@ -138,20 +143,32 @@
             <div class="space-y-6">
               <!-- 通知按钮 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   通知
                 </h3>
                 <div class="flex flex-wrap gap-4">
-                  <UButton @click="showNotification('success')">成功通知</UButton>
-                  <UButton @click="showNotification('info')" color="info">信息通知</UButton>
-                  <UButton @click="showNotification('warning')" color="warning">警告通知</UButton>
-                  <UButton @click="showNotification('error')" color="error">错误通知</UButton>
+                  <UButton @click="showNotification('success')"
+                    >成功通知</UButton
+                  >
+                  <UButton color="info" @click="showNotification('info')"
+                    >信息通知</UButton
+                  >
+                  <UButton color="warning" @click="showNotification('warning')"
+                    >警告通知</UButton
+                  >
+                  <UButton color="error" @click="showNotification('error')"
+                    >错误通知</UButton
+                  >
                 </div>
               </div>
 
               <!-- 徽章 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   徽章
                 </h3>
                 <div class="flex flex-wrap gap-4 items-center">
@@ -166,7 +183,9 @@
 
               <!-- 进度条 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   进度条
                 </h3>
                 <div class="space-y-4">
@@ -189,18 +208,19 @@
             <div class="space-y-6">
               <!-- 表格 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   表格
                 </h3>
-                <UTable
-                  :rows="tableData"
-                  :columns="tableColumns"
-                />
+                <UTable :rows="tableData" :data="tableColumns" />
               </div>
 
               <!-- 头像 -->
               <div>
-                <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3
+                  class="text-lg font-semibold mb-4 text-gray-900 dark:text-white"
+                >
                   头像
                 </h3>
                 <div class="flex gap-4 items-center">
@@ -213,15 +233,8 @@
                     alt="Avatar"
                     size="lg"
                   />
-                  <UAvatar
-                    text="JD"
-                    color="primary"
-                  />
-                  <UAvatar
-                    text="AB"
-                    color="success"
-                    size="sm"
-                  />
+                  <UAvatar text="JD" color="primary" />
+                  <UAvatar text="AB" color="success" size="sm" />
                 </div>
               </div>
             </div>
@@ -239,96 +252,99 @@
 
 // 页面元数据
 useHead({
-  title: '组件展示',
+  title: "组件展示",
   meta: [
     {
-      name: 'description',
-      content: '展示 Nuxt UI 组件库中各种组件的使用方法和效果'
-    }
-  ]
-})
+      name: "description",
+      content: "展示 Nuxt UI 组件库中各种组件的使用方法和效果",
+    },
+  ],
+});
 
 // 表单数据
 const formData = reactive({
-  name: '',
-  email: '',
-  message: '',
-  category: '',
+  name: "",
+  email: "",
+  message: "",
+  category: "",
   agree: false,
-  priority: 'medium'
-})
+  priority: "medium",
+});
 
 // 选择器选项
 const categoryOptions = [
-  { label: '技术支持', value: 'tech' },
-  { label: '销售咨询', value: 'sales' },
-  { label: '产品反馈', value: 'feedback' },
-  { label: '其他', value: 'other' }
-]
+  { label: "技术支持", value: "tech" },
+  { label: "销售咨询", value: "sales" },
+  { label: "产品反馈", value: "feedback" },
+  { label: "其他", value: "other" },
+];
 
 const priorityOptions = [
-  { label: '低', value: 'low' },
-  { label: '中', value: 'medium' },
-  { label: '高', value: 'high' }
-]
+  { label: "低", value: "low" },
+  { label: "中", value: "medium" },
+  { label: "高", value: "high" },
+];
 
 // 进度条值
-const progressValue = ref(60)
+const progressValue = ref(60);
 
 // 表格数据
-const tableColumns = [
-  { key: 'name', label: '姓名' },
-  { key: 'email', label: '邮箱' },
-  { key: 'role', label: '角色' },
-  { key: 'status', label: '状态' }
-]
+const tableColumns: Array<{
+  key: string;
+  label: string;
+}> = [
+  { key: "name", label: "姓名" },
+  { key: "email", label: "邮箱" },
+  { key: "role", label: "角色" },
+  { key: "status", label: "状态" },
+];
 
 const tableData = [
   {
-    name: '张三',
-    email: 'zhangsan@example.com',
-    role: '管理员',
-    status: '活跃'
+    name: "张三",
+    email: "zhangsan@example.com",
+    role: "管理员",
+    status: "活跃",
   },
   {
-    name: '李四',
-    email: 'lisi@example.com',
-    role: '用户',
-    status: '活跃'
+    name: "李四",
+    email: "lisi@example.com",
+    role: "用户",
+    status: "活跃",
   },
   {
-    name: '王五',
-    email: 'wangwu@example.com',
-    role: '用户',
-    status: '非活跃'
-  }
-]
+    name: "王五",
+    email: "wangwu@example.com",
+    role: "用户",
+    status: "非活跃",
+  },
+];
 
 /**
  * 显示通知
  */
-const showNotification = (type: 'success' | 'info' | 'warning' | 'error') => {
+const showNotification = (type: "success" | "info" | "warning" | "error") => {
   const messages = {
-    success: '操作成功！',
-    info: '这是一条信息通知',
-    warning: '请注意这个警告',
-    error: '发生了一个错误'
-  }
+    success: "操作成功！",
+    info: "这是一条信息通知",
+    warning: "请注意这个警告",
+    error: "发生了一个错误",
+  };
 
   // 简单的通知实现，实际项目中可以使用 Nuxt UI 的 Toast 组件
-  alert(messages[type])
-}
+  alert(messages[type]);
+};
 
 // 定时更新进度条
 onMounted(() => {
   const interval = setInterval(() => {
-    progressValue.value = (progressValue.value + 10) % 100
-  }, 2000)
+    progressValue.value = (progressValue.value + 10) % 100;
+  }, 2000);
 
   onUnmounted(() => {
-    clearInterval(interval)
-  })
-})
+    clearInterval(interval);
+  });
+});
 </script>
 
 <style scoped>

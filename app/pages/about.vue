@@ -201,7 +201,12 @@ useHead({
 })
 
 // 技术栈信息
-const techStack = [
+const techStack: Array<{
+  name: string
+  description: string
+  version: string
+  badgeColor: 'success' | 'info' | 'warning' | 'secondary' | 'primary' | 'error' | 'neutral'
+}> = [
   {
     name: 'Nuxt 4',
     description: '最新的全栈 Vue.js 框架，提供服务端渲染、静态生成等功能',
@@ -235,7 +240,11 @@ const techStack = [
 ]
 
 // 项目统计
-const projectStats = [
+const projectStats: Array<{
+  label: string
+  value: string
+  color: 'success' | 'info' | 'warning' | 'secondary' | 'primary' | 'error' | 'neutral'
+}> = [
   { label: '组件数量', value: '100+', color: 'info' },
   { label: '模块数量', value: '4', color: 'success' },
   { label: '页面数量', value: '3', color: 'warning' },
