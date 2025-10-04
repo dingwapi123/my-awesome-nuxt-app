@@ -115,17 +115,17 @@
           <div class="space-y-4">
             <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
               <h4 class="font-semibold mb-2 text-gray-900 dark:text-white">开发服务器</h4>
-              <UCode>pnpm dev</UCode>
+              <UKbd>pnpm dev</UKbd>
             </div>
             
             <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
               <h4 class="font-semibold mb-2 text-gray-900 dark:text-white">构建生产版本</h4>
-              <UCode>pnpm build</UCode>
+              <UKbd>pnpm build</UKbd>
             </div>
             
             <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
               <h4 class="font-semibold mb-2 text-gray-900 dark:text-white">预览生产版本</h4>
-              <UCode>pnpm preview</UCode>
+              <UKbd>pnpm preview</UKbd>
             </div>
           </div>
         </UCard>
