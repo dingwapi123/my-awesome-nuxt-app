@@ -96,5 +96,20 @@ export default defineNuxtConfig({
       },
     },
     plugins: [tailwindcss()],
+    server: {
+      hmr: {
+        port: 24678,
+        overlay: false,
+      },
+    },
+  },
+
+  // Nitro 配置
+  nitro: {
+    routeRules: {
+      '/@vite/**': { prerender: false },
+      '/__vite_ping': { prerender: false },
+      '/@vite/client': { prerender: false },
+    },
   },
 });
