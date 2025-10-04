@@ -1,0 +1,114 @@
+/**
+ * 目录（TOC）组件的自定义样式
+ * 提供更好的视觉层次和交互体验
+ */
+
+/* 目录容器样式 */
+.toc-container {
+  @apply space-y-1;
+}
+
+/* 目录链接基础样式 */
+.toc-container a {
+  @apply block py-2 px-3 text-sm rounded-lg transition-all duration-200;
+  @apply text-gray-600 dark:text-gray-400;
+  @apply hover:text-gray-900 dark:hover:text-gray-100;
+  @apply hover:bg-gray-50 dark:hover:bg-gray-700;
+  @apply border-l-2 border-transparent;
+}
+
+/* 激活状态的目录链接 */
+.toc-container a.router-link-active,
+.toc-container a[aria-current="true"] {
+  @apply text-primary-600 dark:text-primary-400;
+  @apply bg-primary-50 dark:bg-primary-900/20;
+  @apply border-l-primary-500;
+  @apply font-medium;
+}
+
+/* 目录层级缩进 */
+.toc-container ul {
+  @apply space-y-1;
+}
+
+.toc-container ul ul {
+  @apply ml-4 mt-1;
+}
+
+.toc-container ul ul ul {
+  @apply ml-4;
+}
+
+.toc-container ul ul ul ul {
+  @apply ml-4;
+}
+
+/* 移动端目录弹窗内的样式调整 */
+.mobile-toc .toc-container a {
+  @apply py-3 px-4;
+}
+
+/* 目录项的悬停效果增强 */
+.toc-container a:hover {
+  @apply transform translate-x-1;
+}
+
+/* 深色模式下的特殊处理 */
+@media (prefers-color-scheme: dark) {
+  .toc-container a.router-link-active,
+  .toc-container a[aria-current="true"] {
+    @apply shadow-sm;
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+  .toc-container {
+    @apply text-base;
+  }
+  
+  .toc-container a {
+    @apply py-2.5 px-4;
+  }
+}
+
+/* 平板设备优化 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .toc-container {
+    @apply max-w-xs mx-auto;
+  }
+}
+
+/* 超大屏幕优化 */
+@media (min-width: 1536px) {
+  .toc-container {
+    @apply text-base;
+  }
+  
+  .toc-container a {
+    @apply py-2.5 px-4;
+  }
+}
+
+/* 小屏幕设备的特殊处理 */
+@media (max-width: 640px) {
+  .mobile-toc .toc-container a {
+    @apply py-4 px-5 text-base;
+  }
+  
+  .mobile-toc .toc-container ul ul {
+    @apply ml-6;
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .toc-container a {
+    @apply border-2;
+  }
+  
+  .toc-container a.router-link-active,
+  .toc-container a[aria-current="true"] {
+    @apply border-primary-600 dark:border-primary-400;
+  }
+}
