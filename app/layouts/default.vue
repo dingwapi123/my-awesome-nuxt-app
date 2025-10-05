@@ -31,23 +31,22 @@
             aria-label="切换菜单"
             @click="mobileOpen = !mobileOpen"
           />
-          <UColorModeButton size="md" />
+          <UColorModeButton size="xl" />
         </div>
       </div>
 
       <!-- 移动端导航（折叠） -->
       <div v-if="mobileOpen" class="md:hidden border-t">
         <div class="container mx-auto px-4 py-2">
-          <UNavigationMenu
-            orientation="vertical"
-            :items="navItems"
-          />
+          <UNavigationMenu orientation="vertical" :items="navItems" />
         </div>
       </div>
     </header>
 
     <!-- Main -->
-    <main class="flex-1 container mx-auto px-4 py-8">
+    <main
+      class="flex-1 bg-gradient-to-br from-slate-50 via-white to-blue-50/50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-950/20"
+    >
       <slot />
     </main>
 
