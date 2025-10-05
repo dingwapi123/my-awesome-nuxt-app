@@ -6,11 +6,12 @@
 <template>
   <div class="min-h-full">
     <!-- Hero 区域 - 全屏设计 -->
-    <section class="relative min-h-screen flex items-center justify-center">
-      <div class="relative z-10 w-full">
-        <div
-          class="text-center space-y-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
-        >
+    <section class="relative min-h-screen flex items-center">
+      <div
+        class="grid lg:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
+        <!-- 左侧内容 -->
+        <div class="text-center lg:text-left space-y-8">
           <!-- 主标题 -->
           <div v-reveal="{ delay: 100 }" class="space-y-6">
             <h1
@@ -19,7 +20,7 @@
               你好，我是 CXZ
             </h1>
             <p
-              class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto"
+              class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
               前端工程师 & 产品设计师，专注于创造优雅的数字体验。
               <br class="hidden md:block" />
@@ -30,7 +31,7 @@
           <!-- 行动按钮 -->
           <div
             v-reveal="{ delay: 200 }"
-            class="flex flex-col sm:flex-row gap-4 justify-center"
+            class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
           >
             <UButton
               to="/blog"
@@ -41,14 +42,59 @@
               阅读博客
             </UButton>
             <UButton
-              to="/about"
+              to="/projects"
               variant="outline"
               size="xl"
-              class="px-8 py-4 text-lg font-semibold"
+              class="px-8 py-4 text-lg font-semibold hover:shadow-lg transition-all duration-300"
             >
-              <UIcon name="i-lucide-user" class="w-5 h-5 mr-2" />
-              了解更多
+              <UIcon name="i-lucide-lightbulb" class="w-5 h-5 mr-2" />
+              查看项目
             </UButton>
+          </div>
+        </div>
+
+        <!-- 右侧内容 - 技术图标 -->
+        <div class="hidden lg:flex justify-center items-center relative">
+          <div
+            class="absolute w-72 h-72 bg-primary-500/10 dark:bg-primary-400/10 rounded-full blur-3xl"
+          />
+          <div
+            class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-500/10 dark:bg-blue-400/10 rounded-full blur-3xl"
+          />
+
+          <div class="relative grid grid-cols-2 gap-8">
+            <div
+              class="flex items-center justify-center w-48 h-48 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300"
+            >
+              <UIcon
+                name="i-simple-icons-vuedotjs"
+                class="w-24 h-24 text-[#4FC08D]"
+              />
+            </div>
+            <div
+              class="flex items-center justify-center w-48 h-48 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 mt-16"
+            >
+              <UIcon
+                name="i-simple-icons-nuxtdotjs"
+                class="w-24 h-24 text-[#00DC82]"
+              />
+            </div>
+            <div
+              class="flex items-center justify-center w-48 h-48 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 -mt-16"
+            >
+              <UIcon
+                name="i-simple-icons-vite"
+                class="w-24 h-24 text-[#646CFF]"
+              />
+            </div>
+            <div
+              class="flex items-center justify-center w-48 h-48 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300"
+            >
+              <UIcon
+                name="i-simple-icons-tailwindcss"
+                class="w-24 h-24 text-[#06B6D4]"
+              />
+            </div>
           </div>
         </div>
       </div>
