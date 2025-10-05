@@ -1,15 +1,11 @@
 ---
-title: 'Hello World - 我的第一篇文章'
-description: '这是使用 Nuxt Content 创建的第一篇示例文章，展示了 Markdown 的各种功能。'
-date: '2024-01-15'
-tags: ['nuxt', 'content', 'markdown', 'blog']
-author: 'Nuxt Developer'
-image: '/images/hello-world.jpg'
+title: "Hello World - 我的第一篇文章"
+description: "这是使用 Nuxt Content 创建的第一篇示例文章，展示了 Markdown 的各种功能。"
+date: "2024-01-15"
+tags: ["nuxt", "content", "markdown", "blog"]
+author: "Nuxt Developer"
+image: "/images/hello-world.jpg"
 ---
-
-# Hello World - 我的第一篇文章
-
-欢迎来到我的 Nuxt Content 博客！这是一篇示例文章，用来展示 Nuxt Content 的强大功能。
 
 ## 什么是 Nuxt Content？
 
@@ -81,6 +77,7 @@ async function fetchUser(userId: number): Promise<User> {
 ## 列表和任务
 
 ### 技术栈
+
 - ✅ Nuxt 4
 - ✅ Vue 3
 - ✅ TypeScript
@@ -89,6 +86,7 @@ async function fetchUser(userId: number): Promise<User> {
 - ✅ Nuxt Content
 
 ### 待办事项
+
 - [ ] 添加更多示例文章
 - [ ] 实现搜索功能
 - [ ] 添加标签页面
@@ -97,16 +95,16 @@ async function fetchUser(userId: number): Promise<User> {
 ## 表格示例
 
 | 功能 | Nuxt Content | 传统 CMS |
-|------|-------------|----------|
-| 性能 | ⚡ 极快 | 🐌 较慢 |
-| 部署 | 🚀 简单 | 🔧 复杂 |
-| 维护 | 💚 容易 | 😰 困难 |
-| 成本 | 💰 免费 | 💸 昂贵 |
+| ---- | ------------ | -------- |
+| 性能 | ⚡ 极快      | 🐌 较慢  |
+| 部署 | 🚀 简单      | 🔧 复杂  |
+| 维护 | 💚 容易      | 😰 困难  |
+| 成本 | 💰 免费      | 💸 昂贵  |
 
 ## 引用
 
 > "Nuxt Content 让内容管理变得简单而强大。它结合了开发者友好的体验和出色的性能。"
-> 
+>
 > — Nuxt 团队
 
 ## 数学公式
@@ -114,6 +112,7 @@ async function fetchUser(userId: number): Promise<User> {
 行内公式：$E = mc^2$
 
 块级公式：
+
 $$
 \sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
 $$
@@ -135,4 +134,4 @@ Nuxt Content 是一个强大的内容管理解决方案，特别适合：
 
 ---
 
-*发布于 2024年1月15日 | 标签: nuxt, content, markdown, blog*
+_发布于 2024 年 1 月 15 日 | 标签: nuxt, content, markdown, blog_

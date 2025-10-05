@@ -1,16 +1,12 @@
 ---
-title: 'Nuxt Content 高级功能详解'
-description: '深入了解 Nuxt Content 的高级功能，包括查询 API、组件集成和性能优化。'
-date: '2024-01-20'
-tags: ['nuxt', 'content', 'advanced', 'tutorial']
-author: 'Senior Developer'
-category: 'tutorial'
+title: "Nuxt Content 高级功能详解"
+description: "深入了解 Nuxt Content 的高级功能，包括查询 API、组件集成和性能优化。"
+date: "2024-01-20"
+tags: ["nuxt", "content", "advanced", "tutorial"]
+author: "Senior Developer"
+category: "tutorial"
 featured: true
 ---
-
-# Nuxt Content 高级功能详解
-
-在上一篇文章中，我们介绍了 Nuxt Content 的基础功能。今天，让我们深入探讨一些高级特性。
 
 ## 查询 API
 
@@ -22,18 +18,18 @@ Nuxt Content 提供了强大的查询 API，让你可以灵活地获取和过滤
 /**
  * 获取所有博客文章
  */
-const { data: posts } = await queryContent('/blog').find()
+const { data: posts } = await queryContent("/blog").find()
 
 /**
  * 获取特定文章
  */
-const { data: post } = await queryContent('/blog/hello-world').findOne()
+const { data: post } = await queryContent("/blog/hello-world").findOne()
 
 /**
  * 按标签过滤
  */
-const { data: nuxtPosts } = await queryContent('/blog')
-  .where({ tags: { $contains: 'nuxt' } })
+const { data: nuxtPosts } = await queryContent("/blog")
+  .where({ tags: { $contains: "nuxt" } })
   .find()
 ```
 
@@ -43,10 +39,10 @@ const { data: nuxtPosts } = await queryContent('/blog')
 /**
  * 复杂查询示例
  */
-const { data: featuredPosts } = await queryContent('/blog')
+const { data: featuredPosts } = await queryContent("/blog")
   .where({
     featured: true,
-    date: { $gte: new Date('2024-01-01') }
+    date: { $gte: new Date("2024-01-01") },
   })
   .sort({ date: -1 })
   .limit(5)
@@ -60,8 +56,8 @@ const { data: searchResults } = await queryContent()
     $or: [
       { title: { $icontains: searchTerm } },
       { description: { $icontains: searchTerm } },
-      { body: { $icontains: searchTerm } }
-    ]
+      { body: { $icontains: searchTerm } },
+    ],
   })
   .find()
 ```
@@ -73,21 +69,13 @@ const { data: searchResults } = await queryContent()
 ```vue
 <template>
   <div class="blog-list">
-    <article 
-      v-for="post in posts" 
-      :key="post._path"
-      class="post-card"
-    >
+    <article v-for="post in posts" :key="post._path" class="post-card">
       <h2>{{ post.title }}</h2>
       <p>{{ post.description }}</p>
       <div class="meta">
         <span>{{ formatDate(post.date) }}</span>
         <div class="tags">
-          <span 
-            v-for="tag in post.tags" 
-            :key="tag"
-            class="tag"
-          >
+          <span v-for="tag in post.tags" :key="tag" class="tag">
             {{ tag }}
           </span>
         </div>
@@ -110,7 +98,7 @@ interface BlogPost {
 }
 
 // 查询博客文章
-const { data: posts } = await queryContent<BlogPost>('/blog')
+const { data: posts } = await queryContent<BlogPost>("/blog")
   .sort({ date: -1 })
   .find()
 
@@ -120,10 +108,10 @@ const { data: posts } = await queryContent<BlogPost>('/blog')
  * @returns 格式化后的日期
  */
 function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  return new Date(dateString).toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   })
 }
 </script>
@@ -138,15 +126,19 @@ function formatDate(dateString: string): string {
 ::
 
 ::code-group
+
 ```bash [pnpm]
 pnpm add @nuxt/content
 ```
+
 ```bash [npm]
 npm install @nuxt/content
 ```
+
 ```bash [yarn]
 yarn add @nuxt/content
 ```
+
 ::
 
 ## 内容类型
@@ -155,18 +147,18 @@ yarn add @nuxt/content
 
 ```yaml
 ---
-title: '文章标题'
-description: '文章描述'
-date: '2024-01-20'
-tags: ['tag1', 'tag2']
+title: "文章标题"
+description: "文章描述"
+date: "2024-01-20"
+tags: ["tag1", "tag2"]
 author:
-  name: '作者姓名'
-  email: 'author@example.com'
-  avatar: '/avatars/author.jpg'
+  name: "作者姓名"
+  email: "author@example.com"
+  avatar: "/avatars/author.jpg"
 seo:
-  title: 'SEO 标题'
-  description: 'SEO 描述'
-  keywords: ['关键词1', '关键词2']
+  title: "SEO 标题"
+  description: "SEO 描述"
+  keywords: ["关键词1", "关键词2"]
 ---
 ```
 
@@ -197,15 +189,15 @@ seo:
 export default defineNuxtConfig({
   nitro: {
     prerender: {
-      routes: ['/sitemap.xml']
-    }
+      routes: ["/sitemap.xml"],
+    },
   },
   content: {
     experimental: {
       // 启用原生 SQLite 以提升性能
-      sqliteConnector: 'native'
-    }
-  }
+      sqliteConnector: "native",
+    },
+  },
 })
 ```
 
@@ -215,10 +207,10 @@ export default defineNuxtConfig({
 /**
  * 带缓存的内容查询
  */
-const cachedPosts = await $fetch('/api/posts', {
-  key: 'blog-posts',
+const cachedPosts = await $fetch("/api/posts", {
+  key: "blog-posts",
   default: () => [],
-  server: true
+  server: true,
 })
 ```
 
@@ -255,7 +247,7 @@ onMounted(() => {
 /**
  * 动态设置页面 meta 信息
  */
-const { data: post } = await queryContent('/blog/hello-world').findOne()
+const { data: post } = await queryContent("/blog/hello-world").findOne()
 
 useSeoMeta({
   title: post.title,
@@ -263,7 +255,7 @@ useSeoMeta({
   ogTitle: post.title,
   ogDescription: post.description,
   ogImage: post.image,
-  twitterCard: 'summary_large_image'
+  twitterCard: "summary_large_image",
 })
 </script>
 ```
@@ -275,16 +267,16 @@ useSeoMeta({
  * 添加 JSON-LD 结构化数据
  */
 useJsonld({
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
   headline: post.title,
   description: post.description,
   author: {
-    '@type': 'Person',
-    name: post.author
+    "@type": "Person",
+    name: post.author,
   },
   datePublished: post.date,
-  image: post.image
+  image: post.image,
 })
 ```
 
@@ -308,7 +300,7 @@ export default defineNuxtConfig({
   ssr: true,
   content: {
     // 内容配置
-  }
+  },
 })
 ```
 
@@ -326,4 +318,4 @@ Nuxt Content 的高级功能包括：
 
 ---
 
-*更新于 2024年1月20日 | 分类: tutorial*
+_更新于 2024 年 1 月 20 日 | 分类: tutorial_
