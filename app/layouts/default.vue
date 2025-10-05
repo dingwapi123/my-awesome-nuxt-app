@@ -27,11 +27,11 @@
       </div>
     </footer>
   </div>
-  
+
 </template>
 
 <script setup lang="ts">
-// 该布局不需要额外逻辑，使用 Nuxt UI 组件即可
+// 使用 Nuxt UI 的内置 UColorModeButton 实现明暗模式切换
 </script>
 
 <style scoped>

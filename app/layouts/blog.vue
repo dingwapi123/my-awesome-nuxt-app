@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-// 可根据需要在此添加与博客相关的逻辑
+// 使用 Nuxt UI 的内置 UColorModeButton 实现明暗模式切换
 </script>
 
 <style scoped>
