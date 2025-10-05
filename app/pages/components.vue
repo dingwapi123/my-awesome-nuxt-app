@@ -213,7 +213,11 @@
                 >
                   表格
                 </h3>
-                <UTable :rows="tableData" :data="tableColumns" />
+                <UTable
+                  :data="tableData"
+                  :columns="tableColumns"
+                  class="w-full"
+                />
               </div>
 
               <!-- 头像 -->
@@ -246,6 +250,8 @@
 </template>
 
 <script setup lang="ts">
+import { h, resolveComponent } from 'vue'
+import type { TableColumn } from "@nuxt/ui"
 /**
  * 组件展示页面逻辑
  */
@@ -259,7 +265,7 @@ useHead({
       content: "展示 Nuxt UI 组件库中各种组件的使用方法和效果",
     },
   ],
-});
+})
 
 // 表单数据
 const formData = reactive({
@@ -269,7 +275,7 @@ const formData = reactive({
   category: "",
   agree: false,
   priority: "medium",
-});
+})
 
 // 选择器选项
 const categoryOptions = [
@@ -277,27 +283,57 @@ const categoryOptions = [
   { label: "销售咨询", value: "sales" },
   { label: "产品反馈", value: "feedback" },
   { label: "其他", value: "other" },
-];
+]
 
 const priorityOptions = [
   { label: "低", value: "low" },
   { label: "中", value: "medium" },
   { label: "高", value: "high" },
-];
+]
 
 // 进度条值
-const progressValue = ref(60);
+const progressValue = ref(60)
 
-// 表格数据
-const tableColumns: Array<{
-  key: string;
-  label: string;
-}> = [
-  { key: "name", label: "姓名" },
-  { key: "email", label: "邮箱" },
-  { key: "role", label: "角色" },
-  { key: "status", label: "状态" },
-];
+// 表格数据（遵循 Nuxt UI UTable 文档）
+const UBadge = resolveComponent('UBadge')
+const UButton = resolveComponent('UButton')
+
+const tableColumns: TableColumn<{
+  name: string
+  email: string
+  role: string
+  status: string
+}>[] = [
+  { accessorKey: "name", header: "姓名" },
+  {
+    accessorKey: "email",
+    header: ({ column }) => {
+      const isSorted = column.getIsSorted()
+      return h(UButton, {
+        color: 'neutral',
+        variant: 'ghost',
+        label: '邮箱',
+        icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
+      })
+    }
+  },
+  { accessorKey: "role", header: "角色" },
+  {
+    accessorKey: "status",
+    header: "状态",
+    cell: ({ row }) => {
+      const status = row.getValue('status') as string
+      const color = ({
+        '活跃': 'success' as const,
+        '非活跃': 'error' as const
+      })[status] || 'neutral'
+
+      return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => status)
+    }
+  }
+]
 
 const tableData = [
   {
@@ -318,7 +354,7 @@ const tableData = [
     role: "用户",
     status: "非活跃",
   },
-];
+]
 
 /**
  * 显示通知
@@ -329,22 +365,22 @@ const showNotification = (type: "success" | "info" | "warning" | "error") => {
     info: "这是一条信息通知",
     warning: "请注意这个警告",
     error: "发生了一个错误",
-  };
+  }
 
   // 简单的通知实现，实际项目中可以使用 Nuxt UI 的 Toast 组件
-  alert(messages[type]);
-};
+  alert(messages[type])
+}
 
 // 定时更新进度条
 onMounted(() => {
   const interval = setInterval(() => {
-    progressValue.value = (progressValue.value + 10) % 100;
-  }, 2000);
+    progressValue.value = (progressValue.value + 10) % 100
+  }, 2000)
 
   onUnmounted(() => {
-    clearInterval(interval);
-  });
-});
+    clearInterval(interval)
+  })
+})
 </script>
 
 <style scoped>
