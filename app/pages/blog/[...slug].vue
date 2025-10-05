@@ -97,25 +97,11 @@
               v-if="post?.body?.toc?.links && post.body.toc.links.length > 0"
               class="mb-8 hidden lg:block"
             >
-              <div
-                class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm"
-              >
-                <h3
-                  class="text-sm font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2"
-                >
-                  <UIcon
-                    name="i-lucide-list"
-                    class="w-4 h-4 text-primary-500"
-                  />
-                  目录
-                </h3>
-                <div class="toc-container">
-                  <UContentToc
-                    :links="post.body.toc.links"
-                    class="text-sm space-y-1"
-                  />
-                </div>
-              </div>
+              <!-- 直接使用目录组件，无额外卡片或边框包裹 -->
+              <UContentToc
+                :links="post.body.toc.links"
+                class="text-sm"
+              />
             </div>
 
             <!-- 移动端目录按钮 -->
