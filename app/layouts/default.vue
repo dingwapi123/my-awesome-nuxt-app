@@ -71,7 +71,9 @@ import type { NavigationMenuItem } from "@nuxt/ui"
 const navItems = ref<NavigationMenuItem[]>([
   { label: "首页", icon: "i-lucide-home", to: "/" },
   { label: "博客", icon: "i-lucide-file-text", to: "/blog" },
+  { label: "项目", icon: "i-lucide-layout-grid", to: "/projects" },
   { label: "关于", icon: "i-lucide-info", to: "/about" },
+  { label: "联系", icon: "i-lucide-mail", to: "/contact" },
 ])
 
 // 移动端菜单开关
