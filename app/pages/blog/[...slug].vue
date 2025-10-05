@@ -83,6 +83,14 @@
             </p>
           </div>
 
+          <!-- 移动端内联目录：放在主内容区域靠前位置 -->
+          <div
+            v-if="post?.body?.toc?.links && post.body.toc.links.length > 0"
+            class="lg:hidden mb-6"
+          >
+            <UContentToc :links="post.body.toc.links" class="text-sm" />
+          </div>
+
           <!-- 文章正文内容 -->
           <div class="prose prose-lg dark:prose-invert max-w-none">
             <ContentRenderer :value="post" />
@@ -100,59 +108,14 @@
               <!-- 直接使用目录组件，无额外卡片或边框包裹 -->
               <UContentToc
                 :links="post.body.toc.links"
+                highlight
+                highlight-color="neutral"
+                color="neutral"
                 class="text-sm"
               />
             </div>
 
-            <!-- 移动端目录按钮 -->
-            <div class="lg:hidden fixed bottom-6 right-6 z-50">
-              <UButton
-                v-if="post?.body?.toc?.links && post.body.toc.links.length > 0"
-                icon="i-lucide-list"
-                size="lg"
-                color="primary"
-                variant="solid"
-                class="shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-full w-14 h-14"
-                @click="showMobileToc = !showMobileToc"
-              />
-            </div>
-
-            <!-- 移动端目录弹窗 -->
-            <UModal v-if="!isLgUp" v-model="showMobileToc">
-              <UCard>
-                <template #header>
-                  <div
-                    class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700"
-                  >
-                    <h3
-                      class="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2"
-                    >
-                      <UIcon
-                        name="i-lucide-list"
-                        class="w-5 h-5 text-primary-500"
-                      />
-                      目录
-                    </h3>
-                    <UButton
-                      icon="i-lucide-x"
-                      variant="ghost"
-                      size="sm"
-                      class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                      @click="showMobileToc = false"
-                    />
-                  </div>
-                </template>
-
-                <div class="p-4 max-h-96 overflow-y-auto mobile-toc">
-                  <UContentToc
-                    v-if="post?.body?.toc?.links"
-                    :links="post.body.toc.links"
-                    class="text-sm"
-                    @click="showMobileToc = false"
-                  />
-                </div>
-              </UCard>
-            </UModal>
+            <!-- 移动端目录改为主内容区域内联展示，此处不再重复 -->
           </div>
         </div>
       </div>
@@ -238,39 +201,7 @@ const route = useRoute()
 const slug = route.params.slug as string[]
 const path = `/blog/${slug.join("/")}`
 
-// 移动端目录显示状态
-const showMobileToc = ref(false)
-
-// 响应式断点：判断是否为桌面端（lg及以上）
-const isLgUp = ref(false)
-let _updateLgUp: (() => void) | null = null
-
-onMounted(() => {
-  const update = () => {
-    // 仅在客户端执行断点判断
-    if (typeof window !== "undefined") {
-      isLgUp.value = window.matchMedia("(min-width: 1024px)").matches
-      // 切到桌面端时自动关闭移动端目录弹窗，避免重复目录
-      if (isLgUp.value) showMobileToc.value = false
-    }
-  }
-  _updateLgUp = update
-  update()
-  if (typeof window !== "undefined") {
-    window.addEventListener("resize", update)
-  }
-})
-
-onBeforeUnmount(() => {
-  if (typeof window !== "undefined" && _updateLgUp) {
-    window.removeEventListener("resize", _updateLgUp)
-  }
-})
-
-// 监听isLgUp变化，增强稳健性
-watch(isLgUp, (val) => {
-  if (val) showMobileToc.value = false
-})
+// 移动端目录改为内联显示，无需按钮和弹窗逻辑
 
 // 获取单篇文章
 const { data: post } = await useAsyncData(`blog-${slug}`, () => {
