@@ -38,10 +38,7 @@
               size="sm"
               class="px-4 py-2 text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex-shrink-0"
             >
-              <UIcon
-                name="i-lucide-book-open"
-                class="w-4 h-4 mr-1"
-              />
+              <UIcon name="i-lucide-book-open" class="w-4 h-4 mr-1" />
               阅读博客
             </UButton>
             <UButton
@@ -50,10 +47,7 @@
               size="sm"
               class="px-4 py-2 text-sm font-semibold hover:shadow-lg transition-all duration-300 flex-shrink-0"
             >
-              <UIcon
-                name="i-lucide-lightbulb"
-                class="w-4 h-4 mr-1"
-              />
+              <UIcon name="i-lucide-lightbulb" class="w-4 h-4 mr-1" />
               查看项目
             </UButton>
           </div>
