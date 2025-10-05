@@ -31,23 +31,29 @@
           <!-- 行动按钮 -->
           <div
             v-reveal="{ delay: 200 }"
-            class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            class="flex flex-row gap-3 justify-center lg:justify-start flex-wrap"
           >
             <UButton
               to="/blog"
-              size="xl"
-              class="px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              size="sm"
+              class="px-4 py-2 text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex-shrink-0"
             >
-              <UIcon name="i-lucide-book-open" class="w-5 h-5 mr-2" />
+              <UIcon
+                name="i-lucide-book-open"
+                class="w-4 h-4 mr-1"
+              />
               阅读博客
             </UButton>
             <UButton
               to="/projects"
               variant="outline"
-              size="xl"
-              class="px-8 py-4 text-lg font-semibold hover:shadow-lg transition-all duration-300"
+              size="sm"
+              class="px-4 py-2 text-sm font-semibold hover:shadow-lg transition-all duration-300 flex-shrink-0"
             >
-              <UIcon name="i-lucide-lightbulb" class="w-5 h-5 mr-2" />
+              <UIcon
+                name="i-lucide-lightbulb"
+                class="w-4 h-4 mr-1"
+              />
               查看项目
             </UButton>
           </div>
