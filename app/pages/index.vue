@@ -11,20 +11,6 @@
         <div
           class="text-center space-y-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
         >
-          <!-- 头像 -->
-          <div v-reveal class="flex justify-center">
-            <div class="relative">
-              <div
-                class="w-32 h-32 bg-gradient-to-br from-primary-500 to-blue-600 rounded-full flex items-center justify-center shadow-2xl"
-              >
-                <UIcon name="i-lucide-user" class="w-16 h-16 text-white" />
-              </div>
-              <div
-                class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white dark:border-gray-900"
-              />
-            </div>
-          </div>
-
           <!-- 主标题 -->
           <div v-reveal="{ delay: 100 }" class="space-y-6">
             <h1
