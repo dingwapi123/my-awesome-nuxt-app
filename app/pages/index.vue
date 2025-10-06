@@ -568,8 +568,6 @@ const formatDate = (date: Date): string => {
 </script>
 
 <style scoped>
-@reference "~/assets/css/main.css";
-
 /* 文本截断效果 */
 .line-clamp-3 {
   display: -webkit-box;
@@ -584,14 +582,29 @@ const formatDate = (date: Date): string => {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  background-color: rgb(243 244 246);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  background-color: rgb(209 213 219);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
+  background-color: rgb(156 163 175);
+}
+
+/* 深色模式滚动条 */
+:global(.dark) ::-webkit-scrollbar-track {
+  background-color: rgb(31 41 55);
+}
+
+:global(.dark) ::-webkit-scrollbar-thumb {
+  background-color: rgb(75 85 99);
+}
+
+:global(.dark) ::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(107 114 128);
 }
 </style>

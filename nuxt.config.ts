@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from "@tailwindcss/vite"
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -104,12 +104,45 @@ export default defineNuxtConfig({
     },
   },
 
-  // Nitro 配置
+  // Nitro 配置 - 针对 Vercel 优化
   nitro: {
+    // Vercel 部署预设
+    preset: "vercel",
+
+    // 预渲染配置
+    prerender: {
+      failOnError: false,
+      crawlLinks: true,
+    },
+
+    // 路由规则
     routeRules: {
-      '/@vite/**': { prerender: false },
-      '/__vite_ping': { prerender: false },
-      '/@vite/client': { prerender: false },
+      // 开发工具相关路由不预渲染
+      "/@vite/**": { prerender: false },
+      "/__vite_ping": { prerender: false },
+      "/@vite/client": { prerender: false },
+
+      // 静态页面预渲染
+      "/": { prerender: true },
+      "/about": { prerender: true },
+      "/contact": { prerender: true },
+      "/projects": { prerender: true },
+      "/components": { prerender: true },
+
+      // 博客页面使用 ISR（增量静态再生）
+      "/blog/**": { isr: true },
+
+      // API 路由
+      "/api/**": { cors: true },
+    },
+
+    // Vercel 特定配置
+    vercel: {
+      functions: {
+        "server/api/**": {
+          maxDuration: 30,
+        },
+      },
     },
   },
-});
+})

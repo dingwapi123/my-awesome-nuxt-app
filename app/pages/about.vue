@@ -306,23 +306,40 @@ const quickLinks = [
 <style scoped>
 /**
  * 页面特定样式
- * 使用 @reference 指令引用主样式文件以支持 @apply
+ * 使用原生 CSS 属性替代 @apply 指令以确保 Tailwind 4 兼容性
  */
-/* @reference "~/assets/css/main.css"; */
 
 .prose {
-  @apply text-gray-600 dark:text-gray-300;
+  color: rgb(75 85 99);
 }
 
 .prose h3 {
-  @apply text-gray-900 dark:text-white font-semibold mt-6 mb-3;
+  color: rgb(17 24 39);
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .prose ul {
-  @apply space-y-2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .prose li {
-  @apply text-gray-600 dark:text-gray-300;
+  color: rgb(75 85 99);
+}
+
+/* 深色模式样式 */
+:global(.dark) .prose {
+  color: rgb(209 213 219);
+}
+
+:global(.dark) .prose h3 {
+  color: rgb(255 255 255);
+}
+
+:global(.dark) .prose li {
+  color: rgb(209 213 219);
 }
 </style>
