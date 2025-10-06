@@ -310,40 +310,45 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <UPageCard
+          <NuxtLink
             v-for="article in articles"
             :key="article.id"
-            class="group hover:shadow-xl transition-all duration-300 cursor-pointer"
+            :to="article.path"
+            class="block"
           >
-            <div class="p-6 space-y-4">
-              <div
-                class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400"
-              >
-                <div>{{ formatDate(article.date) }}</div>
-                <UBadge variant="soft">{{ article.category }}</UBadge>
-              </div>
-
-              <h3
-                class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors"
-              >
-                {{ article.title }}
-              </h3>
-
-              <p class="text-gray-600 dark:text-gray-300 line-clamp-3">
-                {{ article.description }}
-              </p>
-
-              <div class="flex items-center justify-between">
-                <div class="text-sm text-gray-500 dark:text-gray-400">
-                  阅读时间: {{ article.readTime }} 分钟
+            <UPageCard
+              class="group hover:shadow-xl transition-all duration-300 cursor-pointer h-full"
+            >
+              <div class="p-6 space-y-4">
+                <div
+                  class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400"
+                >
+                  <div>{{ formatDate(article.date) }}</div>
+                  <UBadge variant="soft">{{ article.category }}</UBadge>
                 </div>
-                <UIcon
-                  name="i-lucide-arrow-right"
-                  class="w-4 h-4 text-primary-600 group-hover:translate-x-1 transition-transform"
-                />
+
+                <h3
+                  class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors"
+                >
+                  {{ article.title }}
+                </h3>
+
+                <p class="text-gray-600 dark:text-gray-300 line-clamp-3">
+                  {{ article.description }}
+                </p>
+
+                <div class="flex items-center justify-between">
+                  <div class="text-sm text-gray-500 dark:text-gray-400">
+                    阅读时间: {{ article.readTime }} 分钟
+                  </div>
+                  <UIcon
+                    name="i-lucide-arrow-right"
+                    class="w-4 h-4 text-primary-600 group-hover:translate-x-1 transition-transform"
+                  />
+                </div>
               </div>
-            </div>
-          </UPageCard>
+            </UPageCard>
+          </NuxtLink>
 
           <!-- 暂无文章时的占位 -->
           <div
@@ -500,6 +505,7 @@ const articles = ref([
     category: "Vue.js",
     date: new Date("2024-01-15"),
     readTime: 8,
+    path: "/blog/vue3-composition-api-best-practices",
   },
   {
     id: 2,
@@ -509,6 +515,7 @@ const articles = ref([
     category: "Nuxt.js",
     date: new Date("2024-01-10"),
     readTime: 12,
+    path: "/blog/nuxt4-new-features",
   },
   {
     id: 3,
@@ -518,6 +525,7 @@ const articles = ref([
     category: "TypeScript",
     date: new Date("2024-01-05"),
     readTime: 10,
+    path: "/blog/typescript-advanced-tips",
   },
 ])
 
